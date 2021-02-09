@@ -1,0 +1,48 @@
+﻿@model IList<EmployeeManagement.Models.Employee>;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Employee Details";
+}
+@*<table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+        </tr>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.Name</td>
+                <td>@i.Email</td>
+                <td>@i.Department</td>
+            </tr>
+        }
+    </table>*@
+<div class="card-deck">
+    @foreach (var i in Model)
+    {
+        var photoPath = "~/images/" + (i.PhotoPath ?? "noimage.jpg");
+    <div class="card m-3">
+        <div class="card-header">
+            <h3>@i.Name</h3>
+        </div>
+        <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+        <div class="card-footer text-center">
+            <a asp-controller="Home" asp-action="Details" asp-route-id="@i.Id"
+               class="btn btn-primary">Display</a>
+            <a asp-controller="Home" asp-action="Edit" asp-route-id="@i.Id"
+               class="btn btn-primary">Edit</a>
+            <a asp-controller="Home" asp-action="Delete" asp-route-id="@i.Id"
+               class="btn btn-primary">Delete</a>
+        </div>
+    </div>
+
+    }
+</div>
+
+<a asp-controller="Home" asp-action="Create" class="btn btn-primary">Create</a>
+
+        @section Scripts{
+
+        }
